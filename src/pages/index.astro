@@ -1,8 +1,17 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Contactanos from "@components/Contactanos.astro"
+import Inicio from "@components/Inicio.astro"
+import Reserva from "@components/Reserva.astro"
+import Layout from "@layouts/Layout.astro"
+import Caracteristicas from "@components/Caracteristicas.astro"
 ---
 
 <Layout title="TM Cositas">
-	<h1>ESTO CONTENIDO SLOT</h1>
-</Layout>
 
+	<Inicio />
+    <Caracteristicas />
+    <Reserva />
+    <Contactanos />
+    
+
+</Layout>

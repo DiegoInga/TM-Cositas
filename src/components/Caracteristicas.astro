@@ -1,0 +1,63 @@
+---
+const services = [
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" width="32" height="32"><path d="M12 2a2 2 0 012 2v.09a7.99 7.99 0 012.39.69A2 2 0 0018 2h2a2 2 0 012 2v8a8 8 0 01-8 8v2a2 2 0 01-2 2h-4a2 2 0 01-2-2v-2a8 8 0 01-8-8V4a2 2 0 012-2h2a2 2 0 012.61 1.7A7.99 7.99 0 0112 4.09V4a2 2 0 012-2zm-3 18h4v-2h-4v2zm3-4h-2v-2h2v2zm3-4H9v-2h6v2zm-4-4h2v-2h-2v2z"/></svg>`,
+    title: 'Cumpleaños Temáticos',
+    description: 'Creamos la fiesta de cumpleaños perfecta con temas únicos y decoraciones personalizadas.'
+  },
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" width="32" height="32"><path d="M9 12l3-3 3 3H9zm0 4h6v2H9z"/></svg>`,
+    title: 'Toque Mágico',
+    description: 'Añadimos un toque mágico a cada evento para hacerlo inolvidable.'
+  },
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" width="32" height="32"><path d="M21 8a1 1 0 011 1v6a1 1 0 01-1 1H3a1 1 0 01-1-1V9a1 1 0 011-1h18z"/></svg>`,
+    title: 'Entretenimiento Inolvidable',
+    description: 'Ofrecemos entretenimiento que cautivará a todos tus invitados.'
+  },
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" width="32" height="32"><path d="M16 6h2v2h-2V6zm-4 2h2v2h-2V8zm-4 0h2v2H8V8z"/></svg>`,
+    title: 'Organización Profesional',
+    description: 'Nuestro equipo se encarga de todos los detalles para que disfrutes sin preocupaciones.'
+  },
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" width="32" height="32"><path d="M12 21c4.42 0 8-3.58 8-8s-3.58-8-8-8S4 8.58 4 13s3.58 8 8 8z"/></svg>`,
+    title: 'Momentos Memorables',
+    description: 'Transformamos tus sueños en momentos memorables.'
+  },
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" width="32" height="32"><path d="M12 2l1.5 4.5h4.5L15 10l1.5 4.5L12 12l-4.5 2.5L9 10l-4.5-3.5h4.5L12 2z"/></svg>`,
+    title: 'Experiencia Garantizada',
+    description: 'Nuestra experiencia asegura que cada evento sea un éxito.'
+  }
+];
+---
+
+<section class="py-12 bg-white">
+  <div class="container px-4 mx-auto">
+    <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+      {services.map((service) => (
+        <div class="flex flex-col items-center p-6 text-center">
+          <div class="flex items-center justify-center p-4 mb-4 bg-pink-100 rounded-full">
+            <span class="w-8 h-8 text-pink-500" innerHTML={service.icon}></span>
+          </div>
+          <h3 class="mb-2 text-xl font-semibold text-gray-800">{service.title}</h3>
+          <p class="text-gray-600">{service.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Asegura que los iconos tengan el tamaño correcto */
+  .text-pink-500 svg {
+    width: 2rem;
+    height: 2rem;
+    color: #ec4899; /* Color rosa para los iconos */
+  }
+</style>
+
+
+
+
