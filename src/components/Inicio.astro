@@ -1,32 +1,33 @@
 ---
-// Astro component
 import { Image } from 'astro:assets';
+
+interface ImageData {
+  src: string;
+  alt: string;
+}
+
+const images: ImageData[] = [
+  { src: "/src/image/imagen7.jpg", alt: "Imagen 1" },
+  { src: "/src/image/image1.jpeg", alt: "Imagen 2" },
+  { src: "/src/image/image2.jpeg", alt: "Imagen 3" },
+  { src: "/src/image/image3.jpeg", alt: "Imagen 4" },
+];
 ---
 
 <div class="container px-4 py-8 mx-auto md:py-16 lg:py-24">
   <div class="flex flex-col items-center justify-between gap-8 lg:flex-row">
     <div class="space-y-6 lg:w-1/2">
-      <h1 class="text-4xl font-bold md:text-5xl lg:text-6xl text-navy-900">
-        Bienvenidos a TM
-      </h1>
+      <h1 class="text-4xl font-bold md:text-5xl lg:text-6xl text-navy-900">Bienvenidos a TM</h1>
       <h1 class="text-4xl font-bold md:text-5xl lg:text-6xl text-navy-900">COSITAS</h1>
-      <p class="text-xl font-medium md:text-2xl text-navy-700">
-        Donde la magia cobra vida
-      </p>
+      <p class="text-xl font-medium md:text-2xl text-navy-700">Donde la magia cobra vida</p>
       <p class="max-w-lg text-lg text-gray-600">
         Descubre cómo transformamos tus celebraciones en recuerdos inolvidables con un toque especial y mágico.
       </p>
       <div class="flex flex-col gap-4 sm:flex-row">
-        <a
-          href="#contact"
-          class="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white transition duration-300 bg-pink-500 border border-transparent rounded-md hover:bg-pink-600"
-        >
+        <a href="#contact" class="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white transition duration-300 bg-pink-500 border border-transparent rounded-md hover:bg-pink-600">
           Contáctanos
         </a>
-        <a
-          href="#services"
-          class="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-gray-700 transition duration-300 bg-white border border-gray-300 rounded-md hover:bg-gray-50"
-        >
+        <a href="#services" class="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-gray-700 transition duration-300 bg-white border border-gray-300 rounded-md hover:bg-gray-50">
           Ver Servicios
         </a>
       </div>
@@ -45,14 +46,58 @@ import { Image } from 'astro:assets';
         </a>
       </div>
     </div>
-    <div class="lg:w-1/2">
-      <Image
-        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-hH9nPPdubHgkcc4d7pU7kT5ipwS4we.png"
-        alt="Celebración con amigos y familia"
-        width={600}
-        height={400}
-        class="rounded-lg shadow-xl"
-      />
+    <div class="relative overflow-hidden lg:w-1/2" style="margin-top: -50px;"> <!-- Ajusta el valor de margin-top según sea necesario -->
+      <div id="carousel" class="flex transition-transform duration-500 ease-in-out h-65 w-60">
+        {images.map((image, index) => (
+          <Image
+            key={index.toString()}
+            src={image.src}
+            alt={image.alt}
+            width={300}
+            height={200}
+            class="flex-shrink-0 w-full rounded-lg shadow-xl"
+          />
+        ))}
+      </div>
+      <button class="absolute left-0 px-2 py-1 text-white transform -translate-y-1/2 bg-gray-800 top-1/2" onclick="slide(-1)">
+        &#10094;
+      </button>
+      <button class="absolute right-0 px-2 py-1 text-white transform -translate-y-1/2 bg-gray-800 top-1/2" onclick="slide(1)">
+        &#10095;
+      </button>
     </div>
-  </div>
 </div>
+
+<style>
+  #carousel {
+    width: 100%;
+    display: flex;
+    transition: transform 0.5s ease;
+  }
+  .carousel-slide {
+    min-width: 100%;
+  }
+</style>
+
+<script is:inline>
+  let index = 0;
+
+  function slide(direction) {
+    const carousel = document.getElementById('carousel');
+    const totalSlides = carousel.children.length;
+    index = (index + direction + totalSlides) % totalSlides;
+    carousel.style.transform = `translateX(-${index * 100}%)`;
+  }
+
+  function autoSlide() {
+    slide(1);
+    setTimeout(autoSlide, 5000); // Cambia de imagen cada 3 segundos
+  }
+
+  window.onload = function() {
+    autoSlide();
+  };
+
+  window.slide = slide;
+</script>
+
