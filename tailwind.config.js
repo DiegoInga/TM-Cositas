@@ -85,5 +85,8 @@ export default {
   		}
   	}
   },
+  variants: {
+	borderWidth: ['responsive', 'hover', 'focus'],
+  },
   plugins: [require("tailwindcss-animate")],
 };
