@@ -1,10 +1,17 @@
 ---
+import Portada from "@components/sections-servis/portada.astro"
+import Crear from "@components/sections-servis/crear.astro"
+import Listo from "@components/sections-servis/listo.astro"
+import Preguntas from "@components/sections-servis/preguntas.astro"
 import Layout from "@layouts/Layout.astro"
+
 import "@src/globals.css"
 ---
 
 <Layout title="TM Cositas">
 
-	<h1>ESTO ES SERVICIOS</h1>
+	<Portada />
+	<Crear />
+	<Listo />
 
 </Layout>

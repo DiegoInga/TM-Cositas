@@ -1,0 +1,96 @@
+---
+---
+
+<section class="max-w-2xl px-4 py-8 mx-auto">
+    <h3 class="mb-2 text-sm font-semibold text-pink-500">Preguntas Frecuentes</h3>
+    <h2 id="faq-title" class="mb-4 text-2xl font-bold text-gray-800">Resuelve Tus Dudas</h2>
+    <p id="faq-subtitle" class="mb-8 text-gray-600">
+      Aquí encontrarás respuestas a las preguntas más comunes sobre nuestros servicios.
+    </p>
+  
+    <div id="faq-questions" class="space-y-4 transition-all">
+      <!-- Preguntas iniciales -->
+      <div class="flex justify-between p-4 border rounded-lg">
+        <h3 class="w-1/2 text-lg font-semibold text-left">¿Ofrecen servicios personalizados?</h3>
+        <p class="w-1/2 text-right text-gray-600">Sí, cada evento es único y nos adaptamos a tus necesidades específicas.</p>
+      </div>
+      <div class="flex justify-between p-4 border rounded-lg">
+        <h3 class="w-1/2 text-lg font-semibold text-left">¿Cuál es el tiempo de preparación para un evento?</h3>
+        <p class="w-1/2 text-right text-gray-600">Recomendamos contactarnos con al menos un mes de anticipación.</p>
+      </div>
+      <div class="flex justify-between p-4 border rounded-lg">
+        <h3 class="w-1/2 text-lg font-semibold text-left">¿Cómo puedo reservar un evento?</h3>
+        <p class="w-1/2 text-right text-gray-600">Contáctanos a través de nuestro formulario para comenzar a planificar tu evento.</p>
+      </div>
+      <button
+        id="toggle-button"
+        class="mt-4 text-pink-500"
+        onClick="toggleView()"
+      >
+        Ver todas las preguntas →
+      </button>
+    </div>
+  </section>
+  
+  <script>
+    // Función para alternar entre las preguntas iniciales y las adicionales.
+    function toggleView() {
+      const faqTitle = document.getElementById('faq-title');
+      const faqSubtitle = document.getElementById('faq-subtitle');
+      const faqQuestions = document.getElementById('faq-questions');
+      const toggleButton = document.getElementById('toggle-button');
+  
+      // Cambiamos el contenido y el botón según el estado actual.
+      if (faqTitle.style.display !== 'none') {
+        faqTitle.style.display = 'none';
+        faqSubtitle.style.display = 'none';
+        faqQuestions.innerHTML = `
+          <div class="flex justify-between p-4 border rounded-lg">
+            <h3 class="w-1/2 text-lg font-semibold text-left">¿Cuál es el costo del servicio?</h3>
+            <p class="w-1/2 text-right text-gray-600">El costo depende de los servicios específicos que elijas.</p>
+          </div>
+          <div class="flex justify-between p-4 border rounded-lg">
+            <h3 class="w-1/2 text-lg font-semibold text-left">¿Qué sucede si cancelo mi evento?</h3>
+            <p class="w-1/2 text-right text-gray-600">Por favor, consulta nuestra política de cancelación para más detalles.</p>
+          </div>
+          <div class="flex justify-between p-4 border rounded-lg">
+            <h3 class="w-1/2 text-lg font-semibold text-left">¿Ofrecen servicios para eventos internacionales?</h3>
+            <p class="w-1/2 text-right text-gray-600">Sí, brindamos servicios en diferentes ubicaciones internacionales.</p>
+          </div>
+          <button
+            class="mt-4 text-pink-500"
+            onClick="toggleView()"
+          >
+            Regresar
+          </button>
+        `;
+      } else {
+        faqTitle.style.display = 'block';
+        faqSubtitle.style.display = 'block';
+        faqQuestions.innerHTML = `
+          <div class="flex justify-between p-4 border rounded-lg">
+            <h3 class="w-1/2 text-lg font-semibold text-left">¿Ofrecen servicios personalizados?</h3>
+            <p class="w-1/2 text-right text-gray-600">Sí, cada evento es único y nos adaptamos a tus necesidades específicas.</p>
+          </div>
+          <div class="flex justify-between p-4 border rounded-lg">
+            <h3 class="w-1/2 text-lg font-semibold text-left">¿Cuál es el tiempo de preparación para un evento?</h3>
+            <p class="w-1/2 text-right text-gray-600">Recomendamos contactarnos con al menos un mes de anticipación.</p>
+          </div>
+          <div class="flex justify-between p-4 border rounded-lg">
+            <h3 class="w-1/2 text-lg font-semibold text-left">¿Cómo puedo reservar un evento?</h3>
+            <p class="w-1/2 text-right text-gray-600">Contáctanos a través de nuestro formulario para comenzar a planificar tu evento.</p>
+          </div>
+          <button
+            id="toggle-button"
+            class="mt-4 text-pink-500"
+            onClick="toggleView()"
+          >
+            Ver todas las preguntas →
+          </button>
+        `;
+      }
+    }
+  </script>
+  
+
+  
