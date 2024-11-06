@@ -1,23 +1,78 @@
-<header class="flex items-center justify-between w-full px-6 py-4 transition-shadow duration-300 border border-gray-200 shadow-md md:px-20 hover:shadow-lg">
+<header class="relative z-50 flex items-center justify-between w-full px-6 py-4 transition-shadow duration-300 border border-gray-200 shadow-md md:px-20 hover:shadow-lg">
   <div class="flex items-center">
     <img src="/src/image/logo-tmcositass.jpg" alt="Logo" class="w-12 h-12 transition-transform duration-300 hover:scale-110" loading="lazy" />
   </div>
 
+  <!-- Menú de navegación para escritorio -->
   <nav class="hidden space-x-14 md:flex">
     <a href="/" class="text-lg text-gray-600 transition-all duration-300 hover:text-pink-500 hover:scale-105">Inicio</a>
     <a href="/servicios" class="text-lg text-gray-600 transition-all duration-300 hover:text-pink-500 hover:scale-105">Servicios</a>
     <a href="/deco" class="text-lg text-gray-600 transition-all duration-300 hover:text-pink-500 hover:scale-105">Decoraciones</a>
   </nav>
 
-  <div class="flex items-center space-x-10">
+  <!-- Botón de contacto para escritorio (oculto en móviles) -->
+  <div class="items-center hidden space-x-10 md:flex">
     <a href="#" class="flex items-center py-3 text-lg text-white transition-all duration-500 bg-pink-500 rounded-full px-7 hover:bg-pink-600 hover:scale-105">
-      Contact us
+      Contáctanos
       <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
       </svg>
     </a>
   </div>
+
+  <!-- Botón del menú para móvil -->
+  <div class="flex items-center md:hidden">
+    <button id="menu-toggle" class="text-gray-600 hover:text-pink-500 focus:outline-none">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+  </div>
 </header>
+
+<!-- Menú para móvil (oculto por defecto) con altura personalizada y animación -->
+<div id="mobile-menu" class="absolute top-0 left-0 right-0 flex-col hidden w-full z-50 transition-transform duration-300 ease-in-out transform bg-white shadow-lg md:hidden opacity-0 translate-y-[-20px]" style="height: 30vh;">
+  <!-- Botón de cierre "X" -->
+  <div class="flex justify-end p-4">
+    <button id="menu-close" class="text-gray-600 hover:text-pink-500 focus:outline-none">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Enlaces del menú móvil -->
+  <nav class="flex flex-col items-center space-y-6">
+    <a href="/" class="text-lg text-gray-600 transition-all duration-300 border-b-4 hover:border-pink-500 hover:scale-110">Inicio</a>
+    <a href="/servicios" class="text-lg text-gray-600 transition-all duration-300 border-b-4 hover:border-pink-500 hover:scale-110">Servicios</a>
+    <a href="/deco" class="text-lg text-gray-600 transition-all duration-300 border-b-4 hover:border-pink-500 hover:scale-110">Decoraciones</a>
+  </nav>
+</div>
+
+<script type="module">
+  // Obtener los elementos del DOM
+  const menuToggle = document.getElementById('menu-toggle');
+  const menuClose = document.getElementById('menu-close');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  // Verificar si los elementos existen antes de agregar los eventos
+  if (menuToggle && menuClose && mobileMenu) {
+    menuToggle.addEventListener('click', () => {
+      // Mostrar el menú con animación
+      mobileMenu.classList.remove('hidden', 'opacity-0', 'translate-y-[-20px]');
+      mobileMenu.classList.add('opacity-100', 'translate-y-0');
+    });
+
+    menuClose.addEventListener('click', () => {
+      // Ocultar el menú con animación
+      mobileMenu.classList.remove('opacity-100', 'translate-y-0');
+      mobileMenu.classList.add('opacity-0', 'translate-y-[-20px]');
+      mobileMenu.addEventListener('transitionend', () => {
+        mobileMenu.classList.add('hidden');
+      }, { once: true });
+    });
+  }
+</script>
 
 
 

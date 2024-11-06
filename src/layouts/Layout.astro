@@ -17,6 +17,59 @@ const { title } = Astro.props;
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" href="/src/image/logo-tmcositas.ico" />
 		<title>{title}</title>
+		<style>
+			/* Estilos para el botón flotante de WhatsApp */
+			.whatsapp-float-container {
+				position: fixed;
+				bottom: 30px;
+				right: 30px;
+				display: flex;
+				align-items: center;
+				cursor: pointer;
+				z-index: 1000;
+			}
+
+			.whatsapp-float {
+				width: 70px;
+				height: 70px;
+				background-color: #25D366;
+				border-radius: 50%;
+				box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				transition: background-color 0.3s, transform 0.3s;
+			}
+
+			.whatsapp-float img {
+				width: 50px;
+				height: 50px;
+			}
+
+			.whatsapp-tooltip {
+				visibility: hidden;
+				opacity: 0;
+				margin-right: 10px;
+				padding: 8px 12px;
+				background-color: #25D366;
+				color: white;
+				font-weight: 500;
+				border-radius: 5px;
+				font-size: 14px;
+				white-space: nowrap;
+				transition: opacity 0.3s;
+			}
+
+			.whatsapp-float-container:hover .whatsapp-tooltip {
+				visibility: visible;
+				opacity: 1;
+			}
+
+			.whatsapp-float:hover {
+				background-color: #20b558;
+				transform: scale(1.1);
+			}
+		</style>
 	</head>
 	<body>
 
@@ -27,6 +80,14 @@ const { title } = Astro.props;
 		</main>
 
 		<Footer />
+
+		<!-- Botón flotante de WhatsApp con tooltip -->
+		<a href="https://wa.me/51908618955" class="whatsapp-float-container" target="_blank" rel="noopener noreferrer">
+			<span class="whatsapp-tooltip">Contáctanos</span>
+			<div class="whatsapp-float">
+				<img src="/src/icons/whatsapp.svg" alt="WhatsApp" />
+			</div>
+		</a>
 		
 	</body>
 </html>

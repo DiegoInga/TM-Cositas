@@ -16,50 +16,54 @@ const images: ImageData[] = [
 
 <div class="container px-4 py-8 mx-auto md:py-16 lg:py-24">
   <div class="flex flex-col items-center justify-between gap-8 lg:flex-row">
-    <div class="space-y-6 lg:w-1/2">
+    <div class="space-y-6 text-center lg:w-1/2 lg:text-left">
       <h1 class="text-4xl font-bold md:text-5xl lg:text-6xl text-navy-900">Bienvenidos a TM</h1>
       <h1 class="text-4xl font-bold md:text-5xl lg:text-6xl text-navy-900">COSITAS</h1>
       <p class="text-xl font-medium md:text-2xl text-navy-700">Donde la magia cobra vida</p>
-      <p class="max-w-lg text-lg text-gray-600">
+      <p class="max-w-lg mx-auto text-lg text-gray-600 lg:mx-0">
         Descubre cómo transformamos tus celebraciones en recuerdos inolvidables con un toque especial y mágico.
       </p>
-      <div class="flex flex-col gap-4 sm:flex-row">
+      <div class="flex flex-col justify-center gap-4 sm:flex-row lg:justify-start">
         <a href="https://wa.me/51908618955" class="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white transition duration-300 bg-pink-500 border border-transparent rounded-md hover:scale-105 hover:bg-pink-600">
           Contáctanos
         </a>
-        <a href="/deco" class="items-center justify-center px-6 py-3 text-base font-medium text-gray-700 transition duration-300 bg-white border border-gray-300 rounded-md ihover:scale-105 nline-flex hover:scale-105 hover:border-pink-500">
+        <a href="/deco" class="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-gray-700 transition duration-300 bg-white border border-gray-300 rounded-md hover:scale-105 hover:border-pink-500">
           Ver Decoraciones
         </a>
       </div>
-      <div class="flex pt-4 space-x-4">
-        <a href="https://www.facebook.com/tmcositas" class="text-pink-500 transition duration-300 hover:text-navy-900 hover:scale-105">
-          <span class="sr-only">Facebook</span>
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/>
-          </svg>
+      <div class="flex justify-center pt-4 space-x-4 lg:justify-start">
+        <!-- Íconos de redes sociales -->
+        <a href="https://www.facebook.com/tmcositas" target="_blank" class="text-pink-500 transition duration-300 hover:text-navy-900 hover:scale-105">
+          <img src="/src/icons/FB.svg" alt="Facebook" class="w-8 h-8" />
         </a>
-        <a href="https://www.instagram.com/tmcositas" class="text-pink-500 transition duration-300 hover:text-navy-900 hover:scale-105">
-          <span class="sr-only">Instagram</span>
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-          </svg>
+        <a href="https://www.instagram.com/tmcositas" target="_blank" class="text-pink-500 transition duration-300 hover:text-navy-900 hover:scale-105">
+          <img src="/src/icons/instagramm.svg" alt="Instagram" class="w-8 h-8" />
+        </a> 
+        <a href="https://wa.me/51908618955" target="_blank" class="text-pink-500 transition duration-300 hover:scale-105">
+          <img src="/src/icons/whatsap.svg" alt="WhatsApp" class="w-8 h-8" />
+        </a> 
+        <a href="https://www.tiktok.com/@tmcositas" target="_blank" class="text-pink-500 transition duration-300 hover:text-navy-900 hover:scale-105">
+          <img src="/src/icons/tik tok.svg" alt="TikTok" class="w-8 h-8" />
         </a>
       </div>
     </div>
-    <div class="relative overflow-hidden transition-transform lg:w-1/2 duration-50 hover:scale-105" style="margin-top: -50px;"> <!-- Ajusta el valor de margin-top según sea necesario -->
-      <div id="carousel" class="flex transition-transform duration-500 ease-in-out h-50 w-60">
+
+    <!-- Carrusel de imágenes con ajuste responsivo -->
+    <div class="relative w-full max-w-sm mx-auto overflow-hidden transition-transform duration-300 lg:w-1/2 md:max-w-md lg:max-w-full lg:mx-0 hover:scale-105">
+      <div id="carousel" class="flex transition-transform duration-500 ease-in-out">
         {images.map((image, index) => (
           <Image
             key={index.toString()}
             src={image.src}
             alt={image.alt}
-            width={300}
-            height={200}
-            class="flex-shrink-0 w-full rounded-lg shadow-xl"
+            width={400}
+            height={266}
+            class="flex-shrink-0 w-full h-auto rounded-lg shadow-xl carousel-slide"
           />
-        ))}
+        ))}        
       </div>
     </div>
+  </div>
 </div>
 
 <style>
@@ -70,6 +74,13 @@ const images: ImageData[] = [
   }
   .carousel-slide {
     min-width: 100%;
+  }
+
+  /* Responsivo */
+  @media (max-width: 1024px) {
+    .container {
+      padding: 1rem;
+    }
   }
 </style>
 
