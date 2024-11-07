@@ -53,14 +53,13 @@ const images: ImageData[] = [
       <div id="carousel" class="flex transition-transform duration-500 ease-in-out">
         {images.map((image, index) => (
           <Image
-            key={index.toString()}
             src={image.src}
             alt={image.alt}
             width={400}
             height={266}
             class="flex-shrink-0 w-full h-auto rounded-lg shadow-xl carousel-slide"
           />
-        ))}        
+        ))}
       </div>
     </div>
   </div>
