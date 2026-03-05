@@ -1,13 +1,13 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
+import { defineConfig } from "astro/config";
+import react from "@astrojs/react";
+import tailwind from "@astrojs/tailwind";
+import icon from "astro-icon";
+import { fileURLToPath } from "url";
+import path from "path";
 
-import react from '@astrojs/react';
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-import tailwind from '@astrojs/tailwind';
-
-import icon from 'astro-icon';
-
-// https://astro.build/config
 // https://astro.build/config
 export default defineConfig({
   integrations: [
@@ -15,6 +15,13 @@ export default defineConfig({
     tailwind({
       applyBaseStyles: false,
     }),
-    icon()
-  ]
+    icon(),
+  ],
+  vite: {
+    resolve: {
+      alias: {
+        "@data": path.resolve(__dirname, "src/data"),
+      },
+    },
+  },
 });

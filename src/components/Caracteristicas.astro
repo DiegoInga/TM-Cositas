@@ -1,84 +1,30 @@
 ---
-import BirthdayCake from '/icons/cake.svg?url';
-import Pencil from '/icons/pencil.svg?url';
-import MusicNote from '/icons/music.svg?url';
-import Users from '/icons/users.svg?url';
-import Heart from '/icons/heart.svg?url';
-import Star from '/icons/star.svg?url';
+import { FEATURES } from "@data/features";
 ---
 
 <section id="caracteristicas" class="py-12 bg-white">
   <div class="container px-4 mx-auto">
     <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-
-      <!-- Cumpleaños Temáticos -->
-      <div class="flex flex-col items-center p-6 text-center">
-        <div class="flex items-center justify-center p-4 mb-4 transition-all duration-500 bg-pink-100 rounded-full hover:scale-105">
-          <img src={BirthdayCake} alt="Cumpleaños Temáticos" class="w-8 h-8 text-pink-500 transition-all duration-500 hover:scale-105"/>
+      {FEATURES.map((feature) => (
+        <div class="flex flex-col items-center p-6 text-center transition-all duration-500 hover:scale-105">
+          <div class="flex items-center justify-center p-4 mb-4 bg-pink-100 rounded-full">
+            {/* SVG icons are recolored to pink via CSS filter below */}
+            <img src={feature.icon} alt={feature.iconAlt} class="w-8 h-8" />
+          </div>
+          <h3 class="mb-2 text-xl font-semibold text-gray-800">{feature.title}</h3>
+          <p class="text-gray-600">{feature.description}</p>
         </div>
-        <h3 class="mb-2 text-xl font-semibold text-gray-800 transition-all duration-500 hover:scale-105">Cumpleaños Temáticos</h3>
-        <p class="text-gray-600 transition-all duration-500 hover:scale-105">Creamos la fiesta de cumpleaños perfecta con temas únicos y decoraciones personalizadas.</p>
-      </div>
-
-      <!-- Toque Mágico -->
-      <div class="flex flex-col items-center p-6 text-center">
-        <div class="flex items-center justify-center p-4 mb-4 transition-all duration-500 bg-pink-100 rounded-full hover:scale-105">
-          <img src={Pencil} alt="Toque Mágico" class="w-8 h-8 text-pink-500 transition-all duration-500 hover:scale-105"/>
-        </div>
-        <h3 class="mb-2 text-xl font-semibold text-gray-800 transition-all duration-500 hover:scale-105">Toque Mágico</h3>
-        <p class="text-gray-600 transition-all duration-500 hover:scale-105">Añadimos un toque mágico a cada evento para hacerlo inolvidable.</p>
-      </div>
-
-      <!-- Entretenimiento Inolvidable -->
-      <div class="flex flex-col items-center p-6 text-center">
-        <div class="flex items-center justify-center p-4 mb-4 transition-all duration-500 bg-pink-100 rounded-full hover:scale-105">
-          <img src={MusicNote} alt="Entretenimiento Inolvidable" class="w-8 h-8 text-pink-500 transition-all duration-500 hover:scale-105"/>
-        </div>
-        <h3 class="mb-2 text-xl font-semibold text-gray-800 transition-all duration-500 hover:scale-105">Entretenimiento Inolvidable</h3>
-        <p class="text-gray-600 transition-all duration-500 hover:scale-105">Ofrecemos entretenimiento que cautivará a todos tus invitados.</p>
-      </div>
-
-      <!-- Grupo de Personas -->
-      <div class="flex flex-col items-center p-6 text-center">
-        <div class="flex items-center justify-center p-4 mb-4 transition-all duration-500 bg-pink-100 rounded-full hover:scale-105">
-          <img src={Users} alt="Grupo de Personas" class="w-8 h-8 text-pink-500 transition-all duration-500 hover:scale-105"/>
-        </div> 
-        <h3 class="mb-2 text-xl font-semibold text-gray-800 transition-all duration-500 hover:scale-105">Grupo de Personas</h3>
-        <p class="text-gray-600 transition-all duration-500 hover:scale-105">Creamos un ambiente perfecto para que todos disfruten juntos.</p>
-      </div>
-
-      <!-- Corazón -->
-      <div class="flex flex-col items-center p-6 text-center">
-        <div class="flex items-center justify-center p-4 mb-4 transition-all duration-500 bg-pink-100 rounded-full hover:scale-105">
-          <img src={Heart} alt="Corazón" class="w-8 h-8 text-pink-500 transition-all duration-500 hover:scale-105"/>
-        </div>
-        <h3 class="mb-2 text-xl font-semibold text-gray-800 transition-all duration-500 hover:scale-105">Corazón</h3>
-        <p class="text-gray-600 transition-all duration-500 hover:scale-105">Transformamos tus sueños en momentos memorables.</p>
-      </div>
-
-      <!-- Estrella -->
-      <div class="flex flex-col items-center p-6 text-center">
-        <div class="flex items-center justify-center p-4 mb-4 transition-all duration-500 bg-pink-100 rounded-full hover:scale-105">
-          <img src={Star} alt="Estrella" class="w-8 h-8 text-pink-500 transition-all duration-500 hover:scale-105"/>
-        </div>
-        <h3 class="mb-2 text-xl font-semibold text-gray-800 transition-all duration-500 hover:scale-105">Estrella</h3>
-        <p class="text-gray-600 transition-all duration-500 hover:scale-105">Nuestra experiencia asegura que cada evento sea un éxito.</p>
-      </div>
-
+      ))}
     </div>
   </div>
 </section>
 
 <style>
-  /* Asegura que los iconos tengan el tamaño correcto y color rosado fuerte */
+  /*
+   * Recolors white/black SVG icons to the brand pink (#ec4899 / pink-500).
+   * Filter values generated via: https://codepen.io/sosuke/pen/Pjoqqp
+   */
   img {
     filter: invert(28%) sepia(91%) saturate(7475%) hue-rotate(320deg) brightness(96%) contrast(106%);
   }
 </style>
-
-
-
-
-
-
-

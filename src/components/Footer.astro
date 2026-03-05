@@ -1,39 +1,62 @@
+---
+import { NAV_LINKS } from "@data/navigation";
+import { SOCIAL_LINKS, WHATSAPP_URL } from "@lib/constants";
+import type { NavLink } from "@lib/types";
+
+const currentYear = new Date().getFullYear();
+
+const socialLinks = [
+  { href: SOCIAL_LINKS.facebook, label: "Facebook", icon: "/icons/facebook.svg" },
+  { href: SOCIAL_LINKS.instagram, label: "Instagram", icon: "/icons/instagram.svg" },
+  { href: WHATSAPP_URL, label: "WhatsApp", icon: "/icons/whatsapp.svg" },
+  { href: SOCIAL_LINKS.tiktok, label: "TikTok", icon: "/icons/tiktok.svg" },
+];
+---
+
 <footer class="py-8 bg-white">
-    <div class="container px-4 mx-auto">
-        <!-- Contenedor principal del footer -->
-        <div class="flex flex-col items-center justify-center space-y-6 sm:space-y-0">
-            
-            <!-- Menú de navegación centrado con hover rosado y animación -->
-            <nav class="flex flex-col items-center py-6 space-y-4 text-gray-700 sm:flex-row sm:space-y-0 sm:space-x-8">
-                <a href="/" class="px-2 transition-all duration-300 hover:text-pink-500 hover:scale-105">Inicio</a>
-                <a href="/servicios" class="px-2 transition-all duration-300 hover:text-pink-500 hover:scale-105">Nuestros Servicios</a>
-                <a href="/deco" class="px-2 transition-all duration-300 hover:text-pink-500 hover:scale-105">Decoraciones</a>
-            </nav>
-    
-            <!-- Iconos sociales con hover rosado y animación -->
-            <div class="flex justify-center pt-6 space-x-6">
-                <a href="https://www.facebook.com/tmcositas" aria-label="Facebook" class="px-2 py-4 text-gray-700 transition duration-500 ease-in-out hover:text-pink-500 hover:scale-105">
-                    <img src="/icons/facebook.svg" alt="Facebook" class="w-8 h-8 fill-current" />
-                </a>
-                <a href="https://www.instagram.com/tmcositas" aria-label="Instagram" class="px-2 py-4 text-gray-700 transition duration-500 ease-in-out hover:text-pink-500 hover:scale-105">
-                    <img src="/icons/instagram.svg" alt="Instagram" class="w-8 h-8 fill-current" />
-                </a>
-                <a href="https://wa.me/c/51953262911" aria-label="WhatsApp" class="px-2 py-4 text-gray-700 transition duration-500 ease-in-out hover:text-pink-500 hover:scale-105">
-                    <img src="/icons/whatsapp.svg" alt="WhastApp" class="w-8 h-8 fill-current" />
-                </a>
-                <a href="https://www.tiktok.com/@tmcositas" aria-label="WhatsApp" class="px-2 py-4 text-gray-700 transition duration-500 ease-in-out hover:text-pink-500 hover:scale-105">
-                    <img src="/icons/tiktok.svg" alt="tiktok" class="w-8 h-8 fill-current" />
-                </a>
-            </div>
-        </div>
-    
-        <!-- Derechos de autor centrados -->
-        <div class="px-4 pb-6 mt-6 text-sm text-center text-gray-600">
-            © 2024 TM COSITAS. Todos los derechos reservados. Creando momentos mágicos para cada celebración.
-        </div>
+  <div class="container px-4 mx-auto">
+    <div class="flex flex-col items-center justify-center space-y-6 sm:space-y-0">
+
+      <!-- Navegación -->
+      <nav
+        class="flex flex-col items-center py-6 space-y-4 text-gray-700 sm:flex-row sm:space-y-0 sm:space-x-8"
+        aria-label="Navegación del pie de página"
+      >
+        {NAV_LINKS.map((link: NavLink) => (
+          <a
+            href={link.href}
+            class="px-2 transition-all duration-300 hover:text-pink-500 hover:scale-105"
+          >
+            {link.label}
+          </a>
+        ))}
+      </nav>
+
+      <!-- Redes sociales -->
+      <div class="flex justify-center pt-6 space-x-6">
+        {socialLinks.map((social) => (
+          <a
+            href={social.href}
+            aria-label={social.label}
+            class="px-2 py-4 text-gray-700 transition duration-500 ease-in-out hover:text-pink-500 hover:scale-105"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              src={social.icon}
+              alt={social.label}
+              class="w-8 h-8"
+              width="32"
+              height="32"
+            />
+          </a>
+        ))}
+      </div>
     </div>
+
+    <!-- Derechos de autor -->
+    <div class="px-4 pb-6 mt-6 text-sm text-center text-gray-600">
+      &copy; {currentYear} TM COSITAS. Todos los derechos reservados. Creando momentos mágicos para cada celebración.
+    </div>
+  </div>
 </footer>
-
-
-
-

@@ -1,17 +1,14 @@
 ---
-import Contactanos from "@components/Contactanos.astro"
-import Inicio from "@components/Inicio.astro"
-import Reserva from "@components/Reserva.astro"
-import Layout from "@layouts/Layout.astro"
-import Caracteristicas from "@components/Caracteristicas.astro"
-import "@src/globals.css"
+import Layout from "@layouts/Layout.astro";
+import Inicio from "@components/Inicio.astro";
+import Caracteristicas from "@components/Caracteristicas.astro";
+import Reserva from "@components/Reserva.astro";
+import DecoKids from "@components/DecoKids.astro";
 ---
 
-<Layout title="TM Cositas">
-
-	<Inicio />
-    <Caracteristicas />
-    <Reserva />
-    <Contactanos />
-
+<Layout title="TM Cositas" description="Decoraciones mágicas para tus celebraciones especiales. Cumpleaños temáticos, fiestas infantiles y más.">
+  <Inicio />
+  <Caracteristicas />
+  <Reserva />
+  <DecoKids />
 </Layout>

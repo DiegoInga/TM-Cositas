@@ -10,6 +10,7 @@
       "@pages/*": ["src/pages/*"],
       "@lib/*": ["src/lib/*"],
       "@src/*": ["src/styles/*"],
+      "@data/*": ["src/data/*"],
       "@/*": ["./src/*"]
     }
   }

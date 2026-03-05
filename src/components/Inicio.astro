@@ -1,58 +1,79 @@
 ---
-import { Image } from 'astro:assets';
-
-interface ImageData {
-  src: string;
-  alt: string;
-}
-
-const images: ImageData[] = [
-  { src: "/image/image1.jpeg", alt: "Imagen 1" },
-  { src: "/image/image2.jpeg", alt: "Imagen 2" },
-  { src: "/image/image3.jpeg", alt: "Imagen 3" },
-  { src: "/image/image4.jpeg", alt: "Imagen 4" },
-];
-
+import { Image } from "astro:assets";
+import { CAROUSEL_IMAGES } from "@data/images";
+import { SOCIAL_LINKS, WHATSAPP_URL } from "@lib/constants";
 ---
 
 <div class="container px-4 py-8 mx-auto md:py-16 lg:py-24">
   <div class="flex flex-col items-center justify-between gap-8 lg:flex-row">
     <div class="space-y-6 text-center lg:w-1/2 lg:text-left">
-      <h1 class="text-4xl font-bold md:text-5xl lg:text-6xl text-navy-900">Bienvenidos a TM</h1>
-      <h1 class="text-4xl font-bold md:text-5xl lg:text-6xl text-navy-900">COSITAS</h1>
+      <h1 class="text-4xl font-bold md:text-5xl lg:text-6xl text-navy-900">
+        Bienvenidos a TM <span class="block">COSITAS</span>
+      </h1>
       <p class="text-xl font-medium md:text-2xl text-navy-700">Donde la magia cobra vida</p>
       <p class="max-w-lg mx-auto text-lg text-gray-600 lg:mx-0">
         Descubre cómo transformamos tus celebraciones en recuerdos inolvidables con un toque especial y mágico.
       </p>
       <div class="flex flex-col justify-center gap-4 sm:flex-row lg:justify-start">
-        <a href="https://wa.me/51908618955" class="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white transition duration-300 bg-pink-500 border border-transparent rounded-md hover:scale-105 hover:bg-pink-600">
+        <a
+          href={WHATSAPP_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white transition duration-300 bg-pink-500 border border-transparent rounded-md hover:scale-105 hover:bg-pink-600"
+        >
           Contáctanos
         </a>
-        <a href="/deco" class="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-gray-700 transition duration-300 bg-white border border-gray-300 rounded-md hover:scale-105 hover:border-pink-500">
+        <a
+          href="/deco"
+          class="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-gray-700 transition duration-300 bg-white border border-gray-300 rounded-md hover:scale-105 hover:border-pink-500"
+        >
           Ver Decoraciones
         </a>
       </div>
       <div class="flex justify-center pt-4 space-x-4 lg:justify-start">
-        <!-- Íconos de redes sociales -->
-        <a href="https://www.facebook.com/tmcositas" target="_blank" class="text-pink-500 transition duration-300 hover:text-navy-900 hover:scale-105">
-          <img src="/icons/FB.svg" alt="Facebook" class="w-8 h-8" />
+        <a
+          href={SOCIAL_LINKS.facebook}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Facebook"
+          class="text-pink-500 transition duration-300 hover:text-navy-900 hover:scale-105"
+        >
+          <img src="/icons/facebook.svg" alt="Facebook" class="w-8 h-8" />
         </a>
-        <a href="https://www.instagram.com/tmcositas" target="_blank" class="text-pink-500 transition duration-300 hover:text-navy-900 hover:scale-105">
-          <img src="/icons/instagramm.svg" alt="Instagram" class="w-8 h-8" />
-        </a> 
-        <a href="https://wa.me/c/51953262911" target="_blank" class="text-pink-500 transition duration-300 hover:scale-105">
-          <img src="/icons/whatsap.svg" alt="WhatsApp" class="w-8 h-8" />
-        </a> 
-        <a href="https://www.tiktok.com/@tmcositas" target="_blank" class="text-pink-500 transition duration-300 hover:text-navy-900 hover:scale-105">
-          <img src="/icons/tik tok.svg" alt="TikTok" class="w-8 h-8" />
+        <a
+          href={SOCIAL_LINKS.instagram}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Instagram"
+          class="text-pink-500 transition duration-300 hover:text-navy-900 hover:scale-105"
+        >
+          <img src="/icons/instagram.svg" alt="Instagram" class="w-8 h-8" />
+        </a>
+        <a
+          href={SOCIAL_LINKS.whatsapp}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="WhatsApp"
+          class="text-pink-500 transition duration-300 hover:scale-105"
+        >
+          <img src="/icons/whatsapp.svg" alt="WhatsApp" class="w-8 h-8" />
+        </a>
+        <a
+          href={SOCIAL_LINKS.tiktok}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="TikTok"
+          class="text-pink-500 transition duration-300 hover:text-navy-900 hover:scale-105"
+        >
+          <img src="/icons/tiktok.svg" alt="TikTok" class="w-8 h-8" />
         </a>
       </div>
     </div>
 
-    <!-- Carrusel de imágenes con ajuste responsivo -->
+    <!-- Carrusel de imágenes -->
     <div class="relative w-full max-w-sm mx-auto overflow-hidden transition-transform duration-300 lg:w-1/2 md:max-w-md lg:max-w-full lg:mx-0 hover:scale-105">
       <div id="carousel" class="flex transition-transform duration-500 ease-in-out">
-        {images.map((image, index) => (
+        {CAROUSEL_IMAGES.map((image) => (
           <Image
             src={image.src}
             alt={image.alt}
@@ -75,34 +96,20 @@ const images: ImageData[] = [
   .carousel-slide {
     min-width: 100%;
   }
-
-  /* Responsivo */
-  @media (max-width: 1024px) {
-    .container {
-      padding: 1rem;
-    }
-  }
 </style>
 
-<script is:inline>
-  let index = 0;
+<script>
+  const carousel = document.getElementById("carousel");
 
-  function slide(direction) {
-    const carousel = document.getElementById('carousel');
+  if (carousel) {
+    let currentIndex = 0;
     const totalSlides = carousel.children.length;
-    index = (index + direction + totalSlides) % totalSlides;
-    carousel.style.transform = `translateX(-${index * 100}%)`;
+
+    function advance(): void {
+      currentIndex = (currentIndex + 1) % totalSlides;
+      (carousel as HTMLElement).style.transform = `translateX(-${currentIndex * 100}%)`;
+    }
+
+    setInterval(advance, 3000);
   }
-
-  function autoSlide() {
-    slide(1);
-    setTimeout(autoSlide, 3000); // Cambia de imagen cada 3 segundos
-  }
-
-  window.onload = function() {
-    autoSlide();
-  };
-
-  window.slide = slide;
 </script>
-

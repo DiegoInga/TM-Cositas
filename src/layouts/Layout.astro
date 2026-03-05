@@ -1,94 +1,47 @@
 ---
-import Footer from '@components/Footer.astro';
-import Header from '@components/Header.astro';
+import Footer from "@components/Footer.astro";
+import Header from "@components/Header.astro";
+import WhatsAppButton from "@components/WhatsAppButton.astro";
+import "@src/globals.css";
 
 interface Props {
-	title: string;
+  title: string;
+  description?: string;
 }
 
-const { title } = Astro.props;
+const {
+  title,
+  description = "TM Cositas — Decoraciones y eventos únicos para hacer de cada celebración un momento inolvidable.",
+} = Astro.props;
+
+const pageTitle = title.includes("TM Cositas") ? title : `${title} | TM Cositas`;
 ---
 
 <!doctype html>
 <html lang="es">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content="TM Cositas - Tu evento asegurado" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" href="/image/logo-tmcositas.ico" />
-		<title>{title}</title>
-		<style>
-			/* Estilos para el botón flotante de WhatsApp */
-			.whatsapp-float-container {
-				position: fixed;
-				bottom: 30px;
-				right: 30px;
-				display: flex;
-				align-items: center;
-				cursor: pointer;
-				z-index: 1000;
-			}
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
 
-			.whatsapp-float {
-				width: 70px;
-				height: 70px;
-				background-color: #25D366;
-				border-radius: 50%;
-				box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				transition: background-color 0.3s, transform 0.3s;
-			}
+    <!-- Open Graph / social sharing -->
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_PE" />
 
-			.whatsapp-float img {
-				width: 50px;
-				height: 50px;
-			}
+    <link rel="icon" href="/image/logo-tmcositas.ico" />
+    <title>{pageTitle}</title>
+  </head>
+  <body>
+    <Header />
 
-			.whatsapp-tooltip {
-				visibility: hidden;
-				opacity: 0;
-				margin-right: 10px;
-				padding: 8px 12px;
-				background-color: #25D366;
-				color: white;
-				font-weight: 500;
-				border-radius: 5px;
-				font-size: 14px;
-				white-space: nowrap;
-				transition: opacity 0.3s;
-			}
+    <main>
+      <slot />
+    </main>
 
-			.whatsapp-float-container:hover .whatsapp-tooltip {
-				visibility: visible;
-				opacity: 1;
-			}
+    <Footer />
 
-			.whatsapp-float:hover {
-				background-color: #20b558;
-				transform: scale(1.1);
-			}
-		</style>
-	</head>
-	<body>
-
-		<Header />
-
-		<main>
-			<slot />
-		</main>
-
-		<Footer />
-
-		<!-- Botón flotante de WhatsApp con tooltip -->
-		<a href="https://wa.me/c/51953262911" class="whatsapp-float-container" target="_blank" rel="noopener noreferrer">
-			<span class="whatsapp-tooltip">Contáctanos</span>
-			<div class="whatsapp-float">
-				<img src="/icons/whatsapp.svg" alt="WhatsApp" />
-			</div>
-		</a>
-		
-	</body>
+    <WhatsAppButton />
+  </body>
 </html>
-
