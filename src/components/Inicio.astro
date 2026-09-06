@@ -2,16 +2,15 @@
 ---
 
 <section class="relative flex min-h-[92vh] w-full items-end overflow-hidden">
-  <div id="hero-media" class="absolute inset-0 -z-20 h-full w-full">
-    <img
-      id="hero-poster"
-      src="/image/image5.jpg"
-      alt="Decoración temática Hot Wheels realizada por TM Cositas para un cumpleaños infantil"
-      class="absolute inset-0 h-full w-full object-cover"
-      loading="eager"
-      fetchpriority="high"
-    />
-  </div>
+  <video
+    class="absolute inset-0 -z-20 h-full w-full object-cover"
+    src="/video-principal.mp4"
+    autoplay
+    muted
+    loop
+    playsinline
+    aria-hidden="true"
+  />
   <div class="absolute inset-0 -z-10 bg-black/45"></div>
   <div class="absolute inset-0 -z-10 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
 
@@ -51,40 +50,4 @@
     }
   </style>
 
-  <script>
-    // Upgrade the static poster to the autoplaying video only on desktop-sized
-    // screens with a decent connection — mobile visitors and anyone on a
-    // metered/slow connection (or with data saver on) keep the lightweight photo.
-    const isDesktop = window.matchMedia("(min-width: 768px)").matches;
-    const nav = navigator as Navigator & {
-      connection?: { saveData?: boolean; effectiveType?: string };
-    };
-    const connection = nav.connection;
-    const isSlowOrMetered =
-      connection?.saveData || ["slow-2g", "2g", "3g"].includes(connection?.effectiveType ?? "");
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    if (isDesktop && !isSlowOrMetered && !prefersReducedMotion) {
-      const media = document.getElementById("hero-media");
-      const video = document.createElement("video");
-      video.src = "/video-principal.mp4";
-      video.autoplay = true;
-      video.muted = true;
-      video.loop = true;
-      video.playsInline = true;
-      video.setAttribute("aria-hidden", "true");
-      video.className = "absolute inset-0 h-full w-full object-cover";
-      // Start invisible and crossfade in only once a frame is actually ready
-      // to paint — swapping the instant the element exists shows a blank/black
-      // flash before the photo, which read as a jarring flip on reload.
-      video.style.opacity = "0";
-      video.style.transition = "opacity 0.8s ease";
-      video.addEventListener(
-        "canplay",
-        () => requestAnimationFrame(() => (video.style.opacity = "1")),
-        { once: true },
-      );
-      media?.appendChild(video);
-    }
-  </script>
 </section>

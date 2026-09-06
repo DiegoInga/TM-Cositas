@@ -82,11 +82,12 @@
 }
 
 @layer utilities {
-  /* Shared scroll-reveal primitive — toggled by the observer script in Layout.astro. */
+  /* Pre-hydration hidden state — Motion (see Layout.astro) animates from here
+   * with spring physics; this CSS only prevents a flash of visible content
+   * before the script runs. No CSS transition here, Motion owns the motion. */
   [data-reveal] {
     opacity: 0;
     transform: translateY(1.25rem);
-    transition: opacity 0.6s ease, transform 0.6s ease;
   }
   [data-reveal].is-revealed {
     opacity: 1;

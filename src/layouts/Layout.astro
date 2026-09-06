@@ -92,32 +92,37 @@ const localBusinessJsonLd = {
     <Lightbox />
 
     <script>
-      // Fade-and-rise reveal for elements marked [data-reveal], skipped for
-      // reduced-motion users. Shared across every page via the layout.
+      // Fluid spring reveal (Motion) for elements marked [data-reveal], with a
+      // per-element stagger via [data-delay] (ms). Skipped for reduced-motion.
+      import { animate, inView } from "motion";
+
       const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      const revealTargets = document.querySelectorAll("[data-reveal]");
+      const revealTargets = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]"));
 
       if (prefersReducedMotion || !("IntersectionObserver" in window)) {
         revealTargets.forEach((el) => el.classList.add("is-revealed"));
       } else {
-        const observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                entry.target.classList.add("is-revealed");
-                observer.unobserve(entry.target);
-              }
-            });
-          },
-          { threshold: 0.1, rootMargin: "0px 0px 200px 0px" },
-        );
-        revealTargets.forEach((el) => observer.observe(el));
+        revealTargets.forEach((el) => {
+          inView(
+            el,
+            () => {
+              const delayMs = Number(el.dataset.delay ?? 0);
+              animate(
+                el,
+                { opacity: [0, 1], transform: ["translateY(24px)", "translateY(0px)"] },
+                { duration: 0.7, delay: delayMs / 1000, ease: [0.22, 1, 0.36, 1] },
+              );
+              el.classList.add("is-revealed");
+            },
+            { margin: "0px 0px -100px 0px" },
+          );
+        });
 
-        // Safety net: real content must never stay invisible if the observer
-        // misses an element (e.g. it never crosses the viewport threshold).
+        // Safety net: real content must never stay invisible if an element
+        // never crosses the viewport threshold (e.g. it's already off-screen
+        // in an unusual layout).
         window.setTimeout(() => {
           revealTargets.forEach((el) => el.classList.add("is-revealed"));
-          observer.disconnect();
         }, 2500);
       }
     </script>

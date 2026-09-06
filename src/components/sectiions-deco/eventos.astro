@@ -28,7 +28,7 @@ import { WHATSAPP_URL } from "@lib/constants";
         {photos.length > 0 ? (
           <div class="grid grid-cols-1 gap-8 mt-8 sm:grid-cols-2 lg:grid-cols-3">
             {photos.map((event, j) => (
-              <div class="group" data-reveal style={`transition-delay:${j * 60}ms`}>
+              <div class="group" data-reveal data-delay={j * 60}>
                 <div
                   class="relative overflow-hidden rounded-sm aspect-[4/5]"
                   data-lightbox={event.src}
