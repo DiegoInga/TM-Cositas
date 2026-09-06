@@ -74,6 +74,16 @@
       video.playsInline = true;
       video.setAttribute("aria-hidden", "true");
       video.className = "absolute inset-0 h-full w-full object-cover";
+      // Start invisible and crossfade in only once a frame is actually ready
+      // to paint — swapping the instant the element exists shows a blank/black
+      // flash before the photo, which read as a jarring flip on reload.
+      video.style.opacity = "0";
+      video.style.transition = "opacity 0.8s ease";
+      video.addEventListener(
+        "canplay",
+        () => requestAnimationFrame(() => (video.style.opacity = "1")),
+        { once: true },
+      );
       media?.appendChild(video);
     }
   </script>
