@@ -4,12 +4,31 @@ export default {
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
   theme: {
     extend: {
+      fontFamily: {
+        // One quiet, distinctive family for both display and body — the
+        // chrome stays minimal so the colorful party photography carries the
+        // energy instead of competing with it.
+        display: ["Hanken Grotesk", "ui-sans-serif", "system-ui", "sans-serif"],
+        sans: ["Hanken Grotesk", "ui-sans-serif", "system-ui", "sans-serif"],
+      },
       colors: {
-        // Navy palette — used in Inicio.astro hero text
-        navy: {
-          700: "#1e3a5f",
-          900: "#0f1f3d",
+        // Palette is deliberately just two families — white/cream and a soft
+        // dusty rose (never the bright saturated magenta of Tailwind's stock
+        // `pink`) — per the brief: white and a muted, refined pink stand out.
+        mauve: {
+          50: "#FBF4F1",
+          100: "#F5E6E1",
+          200: "#EDD3CB",
+          300: "#DEB6AC",
+          400: "#C99286",
+          500: "#B17567",
+          600: "#96574F",
+          700: "#7A443D",
+          800: "#5F3A32",
+          900: "#472C27",
+          950: "#2C1A17",
         },
+        blush: "#F6E6E1",
         // shadcn/ui CSS-variable-driven tokens
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",

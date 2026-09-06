@@ -1,115 +1,80 @@
 ---
-import { Image } from "astro:assets";
-import { CAROUSEL_IMAGES } from "@data/images";
-import { SOCIAL_LINKS, WHATSAPP_URL } from "@lib/constants";
 ---
 
-<div class="container px-4 py-8 mx-auto md:py-16 lg:py-24">
-  <div class="flex flex-col items-center justify-between gap-8 lg:flex-row">
-    <div class="space-y-6 text-center lg:w-1/2 lg:text-left">
-      <h1 class="text-4xl font-bold md:text-5xl lg:text-6xl text-navy-900">
-        Bienvenidos a TM <span class="block">COSITAS</span>
-      </h1>
-      <p class="text-xl font-medium md:text-2xl text-navy-700">Donde la magia cobra vida</p>
-      <p class="max-w-lg mx-auto text-lg text-gray-600 lg:mx-0">
-        Descubre cómo transformamos tus celebraciones en recuerdos inolvidables con un toque especial y mágico.
-      </p>
-      <div class="flex flex-col justify-center gap-4 sm:flex-row lg:justify-start">
-        <a
-          href={WHATSAPP_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white transition duration-300 bg-pink-500 border border-transparent rounded-md hover:scale-105 hover:bg-pink-600"
-        >
-          Contáctanos
-        </a>
-        <a
-          href="/deco"
-          class="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-gray-700 transition duration-300 bg-white border border-gray-300 rounded-md hover:scale-105 hover:border-pink-500"
-        >
-          Ver Decoraciones
-        </a>
-      </div>
-      <div class="flex justify-center pt-4 space-x-4 lg:justify-start">
-        <a
-          href={SOCIAL_LINKS.facebook}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Facebook"
-          class="text-pink-500 transition duration-300 hover:text-navy-900 hover:scale-105"
-        >
-          <img src="/icons/facebook.svg" alt="Facebook" class="w-8 h-8" />
-        </a>
-        <a
-          href={SOCIAL_LINKS.instagram}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Instagram"
-          class="text-pink-500 transition duration-300 hover:text-navy-900 hover:scale-105"
-        >
-          <img src="/icons/instagram.svg" alt="Instagram" class="w-8 h-8" />
-        </a>
-        <a
-          href={SOCIAL_LINKS.whatsapp}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="WhatsApp"
-          class="text-pink-500 transition duration-300 hover:scale-105"
-        >
-          <img src="/icons/whatsapp.svg" alt="WhatsApp" class="w-8 h-8" />
-        </a>
-        <a
-          href={SOCIAL_LINKS.tiktok}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="TikTok"
-          class="text-pink-500 transition duration-300 hover:text-navy-900 hover:scale-105"
-        >
-          <img src="/icons/tiktok.svg" alt="TikTok" class="w-8 h-8" />
-        </a>
-      </div>
-    </div>
+<section class="relative flex min-h-[92vh] w-full items-end overflow-hidden">
+  <div id="hero-media" class="absolute inset-0 -z-20 h-full w-full">
+    <img
+      id="hero-poster"
+      src="/image/image5.jpg"
+      alt="Decoración temática Hot Wheels realizada por TM Cositas para un cumpleaños infantil"
+      class="absolute inset-0 h-full w-full object-cover"
+      loading="eager"
+      fetchpriority="high"
+    />
+  </div>
+  <div class="absolute inset-0 -z-10 bg-black/45"></div>
+  <div class="absolute inset-0 -z-10 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
 
-    <!-- Carrusel de imágenes -->
-    <div class="relative w-full max-w-sm mx-auto overflow-hidden transition-transform duration-300 lg:w-1/2 md:max-w-md lg:max-w-full lg:mx-0 hover:scale-105">
-      <div id="carousel" class="flex transition-transform duration-500 ease-in-out">
-        {CAROUSEL_IMAGES.map((image) => (
-          <Image
-            src={image.src}
-            alt={image.alt}
-            width={400}
-            height={266}
-            class="flex-shrink-0 w-full h-auto rounded-lg shadow-xl carousel-slide"
-          />
-        ))}
-      </div>
+  <div class="container relative px-6 pb-16 mx-auto md:px-12 md:pb-20">
+    <div class="max-w-xl" data-reveal>
+      <p class="mb-4 text-xs font-semibold tracking-[0.2em] text-white/80 uppercase">
+        Lima Metropolitana · Decoración a medida
+      </p>
+      <h1 class="font-display text-4xl font-medium leading-[1.08] text-white sm:text-5xl lg:text-[3.4rem]">
+        Cada celebración, un mundo propio.
+      </h1>
+      <a
+        href="/deco"
+        class="mt-8 inline-flex items-center rounded-full bg-mauve-500 px-7 py-3 text-sm font-semibold uppercase tracking-[0.1em] text-white transition-colors duration-300 hover:bg-mauve-600"
+      >
+        Nuestras decoraciones
+      </a>
     </div>
   </div>
-</div>
 
-<style>
-  #carousel {
-    width: 100%;
-    display: flex;
-    transition: transform 0.5s ease;
-  }
-  .carousel-slide {
-    min-width: 100%;
-  }
-</style>
+  <div class="absolute inset-x-0 bottom-6 flex justify-center text-white/70 scroll-hint" aria-hidden="true">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7" />
+    </svg>
+  </div>
 
-<script>
-  const carousel = document.getElementById("carousel");
-
-  if (carousel) {
-    let currentIndex = 0;
-    const totalSlides = carousel.children.length;
-
-    function advance(): void {
-      currentIndex = (currentIndex + 1) % totalSlides;
-      (carousel as HTMLElement).style.transform = `translateX(-${currentIndex * 100}%)`;
+  <style>
+    @keyframes scroll-hint {
+      0%, 100% { transform: translateY(0); opacity: 0.6; }
+      50% { transform: translateY(6px); opacity: 1; }
     }
+    .scroll-hint {
+      animation: scroll-hint 2.2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .scroll-hint { animation: none; }
+    }
+  </style>
 
-    setInterval(advance, 3000);
-  }
-</script>
+  <script>
+    // Upgrade the static poster to the autoplaying video only on desktop-sized
+    // screens with a decent connection — mobile visitors and anyone on a
+    // metered/slow connection (or with data saver on) keep the lightweight photo.
+    const isDesktop = window.matchMedia("(min-width: 768px)").matches;
+    const nav = navigator as Navigator & {
+      connection?: { saveData?: boolean; effectiveType?: string };
+    };
+    const connection = nav.connection;
+    const isSlowOrMetered =
+      connection?.saveData || ["slow-2g", "2g", "3g"].includes(connection?.effectiveType ?? "");
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (isDesktop && !isSlowOrMetered && !prefersReducedMotion) {
+      const media = document.getElementById("hero-media");
+      const video = document.createElement("video");
+      video.src = "/video-principal.mp4";
+      video.autoplay = true;
+      video.muted = true;
+      video.loop = true;
+      video.playsInline = true;
+      video.setAttribute("aria-hidden", "true");
+      video.className = "absolute inset-0 h-full w-full object-cover";
+      media?.appendChild(video);
+    }
+  </script>
+</section>

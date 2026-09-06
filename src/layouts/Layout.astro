@@ -1,20 +1,48 @@
 ---
 import Footer from "@components/Footer.astro";
 import Header from "@components/Header.astro";
-import WhatsAppButton from "@components/WhatsAppButton.astro";
+import AnnouncementBar from "@components/AnnouncementBar.astro";
+import FloatingActions from "@components/FloatingActions.astro";
+import Lightbox from "@components/Lightbox.astro";
+import { SOCIAL_LINKS, WHATSAPP_URL } from "@lib/constants";
 import "@src/globals.css";
 
 interface Props {
   title: string;
   description?: string;
+  /** Path under public/ used for social share previews (WhatsApp, Instagram bio link, etc). */
+  image?: string;
 }
 
 const {
   title,
   description = "TM Cositas — Decoraciones y eventos únicos para hacer de cada celebración un momento inolvidable.",
+  image = "/image/image5.jpg",
 } = Astro.props;
 
 const pageTitle = title.includes("TM Cositas") ? title : `${title} | TM Cositas`;
+const ogImageUrl = new URL(image, Astro.url);
+
+// LocalBusiness structured data — helps Google understand and surface TM
+// Cositas for local searches ("decoración de fiestas Lima"). Only confirmed
+// facts from PRODUCT.md go here (no invented street address or price range).
+const localBusinessJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  name: "TM Cositas",
+  description: "Decoración temática para cumpleaños, quinceañeros, bautizos, baby showers y graduaciones en Lima Metropolitana.",
+  image: ogImageUrl.toString(),
+  url: Astro.url.origin,
+  telephone: "+" + WHATSAPP_URL.split("/").pop(),
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Lima",
+    addressRegion: "Lima",
+    addressCountry: "PE",
+  },
+  areaServed: "Lima Metropolitana",
+  sameAs: [SOCIAL_LINKS.facebook, SOCIAL_LINKS.instagram, SOCIAL_LINKS.tiktok],
+};
 ---
 
 <!doctype html>
@@ -29,11 +57,29 @@ const pageTitle = title.includes("TM Cositas") ? title : `${title} | TM Cositas`
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="es_PE" />
+    <meta property="og:url" content={Astro.url} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
 
     <link rel="icon" href="/image/logo-tmcositas.ico" />
+
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(localBusinessJsonLd)} />
+
+    <!-- Hanken Grotesk — one quiet, distinctive family for display and body alike -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
     <title>{pageTitle}</title>
   </head>
-  <body>
+  <body class="font-sans text-gray-900">
+    <AnnouncementBar />
     <Header />
 
     <main>
@@ -42,6 +88,38 @@ const pageTitle = title.includes("TM Cositas") ? title : `${title} | TM Cositas`
 
     <Footer />
 
-    <WhatsAppButton />
+    <FloatingActions />
+    <Lightbox />
+
+    <script>
+      // Fade-and-rise reveal for elements marked [data-reveal], skipped for
+      // reduced-motion users. Shared across every page via the layout.
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const revealTargets = document.querySelectorAll("[data-reveal]");
+
+      if (prefersReducedMotion || !("IntersectionObserver" in window)) {
+        revealTargets.forEach((el) => el.classList.add("is-revealed"));
+      } else {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-revealed");
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.1, rootMargin: "0px 0px 200px 0px" },
+        );
+        revealTargets.forEach((el) => observer.observe(el));
+
+        // Safety net: real content must never stay invisible if the observer
+        // misses an element (e.g. it never crosses the viewport threshold).
+        window.setTimeout(() => {
+          revealTargets.forEach((el) => el.classList.add("is-revealed"));
+          observer.disconnect();
+        }, 2500);
+      }
+    </script>
   </body>
 </html>

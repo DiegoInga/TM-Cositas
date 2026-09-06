@@ -1,28 +1,71 @@
 ---
-import { EVENTS } from "@data/events";
+import { Image } from "astro:assets";
+import { EVENTS, EVENT_CATEGORIES } from "@data/events";
+import { WHATSAPP_URL } from "@lib/constants";
 ---
 
-<section class="py-16 bg-white">
-  <h2 class="w-full pb-2 mb-8 text-4xl font-bold text-center text-gray-800 transition-transform duration-300 hover:scale-110">
-    Decoraciones
-  </h2>
-
-  <div class="flex flex-col items-center">
-    <div class="grid w-full max-w-screen-xl grid-cols-1 gap-8 px-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-      {EVENTS.map((event) => (
-        <div class="relative max-w-full overflow-hidden transform rounded-lg shadow-md">
-          <img
-            src={event.src}
-            alt={event.alt}
-            class="object-cover w-full h-[16rem] transition duration-300 hover:scale-110 hover:brightness-75"
-          />
-          <div class="absolute bottom-0 left-0 p-4 bg-gradient-to-t from-black/60 via-transparent to-transparent">
-            <h3 class="text-lg font-semibold text-white transition-all duration-300 shadow-lg">
-              {event.title}
-            </h3>
-          </div>
-        </div>
-      ))}
-    </div>
-  </div>
+<section class="py-20 text-center bg-white md:py-28">
+  <p class="text-xs font-semibold tracking-[0.2em] text-mauve-600 uppercase">Portafolio</p>
+  <h1 class="mt-3 font-display text-4xl font-medium text-gray-900 sm:text-5xl">Decoraciones</h1>
+  <p class="max-w-lg mx-auto mt-4 text-gray-600">
+    Cada categoría pesa igual para nosotros: mira el estilo que ya montamos y el que estamos
+    construyendo contigo.
+  </p>
 </section>
+
+{EVENT_CATEGORIES.map((category, i) => {
+  const photos = EVENTS.filter((event) => event.category === category.slug);
+  return (
+    <section id={category.slug} class:list={["scroll-mt-24 py-16 md:py-20", i % 2 === 1 && "bg-blush"]}>
+      <div class="container px-6 mx-auto md:px-12">
+        <h2 class="font-display text-2xl font-medium text-gray-900 sm:text-3xl" data-reveal>
+          {category.label}
+        </h2>
+        <p class="mt-1 text-sm text-mauve-600" data-reveal>
+          {category.startingPrice ? `Desde S/ ${category.startingPrice}` : "Cotiza por WhatsApp"}
+        </p>
+
+        {photos.length > 0 ? (
+          <div class="grid grid-cols-1 gap-8 mt-8 sm:grid-cols-2 lg:grid-cols-3">
+            {photos.map((event, j) => (
+              <div class="group" data-reveal style={`transition-delay:${j * 60}ms`}>
+                <div
+                  class="relative overflow-hidden rounded-sm aspect-[4/5]"
+                  data-lightbox={event.src}
+                  data-lightbox-alt={event.alt}
+                  data-lightbox-caption={event.isMock ? "" : event.title}
+                >
+                  <Image
+                    src={event.src}
+                    alt={event.alt}
+                    width={480}
+                    height={600}
+                    class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                </div>
+                {!event.isMock && (
+                  <p class="mt-3 text-sm font-medium text-gray-900">{event.title}</p>
+                )}
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div class="flex flex-col items-start gap-4 py-10 mt-8 border-t border-gray-200" data-reveal>
+            <p class="max-w-md text-gray-600">
+              Aún no publicamos fotos de {category.label.toLowerCase()}, pero ya las hacemos.
+              Escríbenos y te mostramos referencias a medida.
+            </p>
+            <a
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center text-sm font-semibold text-gray-900 border-b border-gray-900 pb-0.5 hover:text-mauve-600 hover:border-mauve-600"
+            >
+              Pregunta por WhatsApp →
+            </a>
+          </div>
+        )}
+      </div>
+    </section>
+  );
+})}

@@ -1,62 +1,64 @@
 ---
 import { NAV_LINKS } from "@data/navigation";
-import { SOCIAL_LINKS, WHATSAPP_URL } from "@lib/constants";
+import { SOCIAL_LINKS } from "@lib/constants";
 import type { NavLink } from "@lib/types";
 
 const currentYear = new Date().getFullYear();
 
 const socialLinks = [
-  { href: SOCIAL_LINKS.facebook, label: "Facebook", icon: "/icons/facebook.svg" },
-  { href: SOCIAL_LINKS.instagram, label: "Instagram", icon: "/icons/instagram.svg" },
-  { href: WHATSAPP_URL, label: "WhatsApp", icon: "/icons/whatsapp.svg" },
-  { href: SOCIAL_LINKS.tiktok, label: "TikTok", icon: "/icons/tiktok.svg" },
+  { href: SOCIAL_LINKS.facebook, label: "Facebook" },
+  { href: SOCIAL_LINKS.instagram, label: "Instagram" },
+  { href: SOCIAL_LINKS.tiktok, label: "TikTok" },
 ];
+
+const socialIconPaths: Record<string, string> = {
+  Facebook:
+    '<path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>',
+  Instagram:
+    '<rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>',
+  TikTok:
+    '<path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/>',
+};
 ---
 
-<footer class="py-8 bg-white">
-  <div class="container px-4 mx-auto">
-    <div class="flex flex-col items-center justify-center space-y-6 sm:space-y-0">
+<footer class="border-t border-mauve-100 bg-mauve-50 pt-14 pb-8 text-mauve-700">
+  <div class="container px-6 mx-auto text-center md:px-12">
+    <a href="/" class="font-display text-xl font-semibold text-gray-900">TM Cositas</a>
 
-      <!-- Navegación -->
-      <nav
-        class="flex flex-col items-center py-6 space-y-4 text-gray-700 sm:flex-row sm:space-y-0 sm:space-x-8"
-        aria-label="Navegación del pie de página"
-      >
-        {NAV_LINKS.map((link: NavLink) => (
-          <a
-            href={link.href}
-            class="px-2 transition-all duration-300 hover:text-pink-500 hover:scale-105"
-          >
-            {link.label}
-          </a>
-        ))}
-      </nav>
+    <nav class="flex flex-wrap justify-center gap-x-8 gap-y-2 mt-6 text-sm" aria-label="Navegación del pie de página">
+      {NAV_LINKS.map((link: NavLink) => (
+        <a href={link.href} class="transition-colors hover:text-gray-900">{link.label}</a>
+      ))}
+    </nav>
 
-      <!-- Redes sociales -->
-      <div class="flex justify-center pt-6 space-x-6">
+    <div class="mt-10 border-t border-dashed border-mauve-200"></div>
+
+    <div class="flex flex-col items-center justify-between gap-4 mt-8 sm:flex-row">
+      <p class="text-xs text-mauve-500">&copy; {currentYear} TM Cositas</p>
+
+      <div class="flex gap-4">
         {socialLinks.map((social) => (
           <a
             href={social.href}
-            aria-label={social.label}
-            class="px-2 py-4 text-gray-700 transition duration-500 ease-in-out hover:text-pink-500 hover:scale-105"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label={social.label}
+            class="flex h-9 w-9 items-center justify-center rounded-full text-mauve-600 ring-1 ring-mauve-200 transition-colors hover:text-gray-900 hover:ring-mauve-400"
           >
-            <img
-              src={social.icon}
-              alt={social.label}
-              class="w-8 h-8"
-              width="32"
-              height="32"
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="w-4 h-4"
+              set:html={socialIconPaths[social.label]}
             />
           </a>
         ))}
       </div>
-    </div>
-
-    <!-- Derechos de autor -->
-    <div class="px-4 pb-6 mt-6 text-sm text-center text-gray-600">
-      &copy; {currentYear} TM COSITAS. Todos los derechos reservados. Creando momentos mágicos para cada celebración.
     </div>
   </div>
 </footer>

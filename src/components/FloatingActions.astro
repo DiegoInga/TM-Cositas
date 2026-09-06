@@ -1,0 +1,39 @@
+---
+import { WHATSAPP_URL } from "@lib/constants";
+---
+
+<!-- Floating WhatsApp action, fixed to the bottom-right of every page. -->
+<a
+  href={WHATSAPP_URL}
+  class="floating-btn floating-btn--whatsapp"
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label="Contactar por WhatsApp"
+>
+  <img src="/icons/whatsapp.svg" alt="" width="24" height="24" aria-hidden="true" />
+</a>
+
+<style>
+  .floating-btn {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3.25rem;
+    height: 3.25rem;
+    border-radius: 9999px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+    transition: transform 0.25s ease;
+  }
+
+  .floating-btn:hover {
+    transform: scale(1.08);
+  }
+
+  .floating-btn--whatsapp {
+    background-color: #25d366;
+  }
+</style>

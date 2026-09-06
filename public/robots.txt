@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+# Add "Sitemap: https://<dominio-final>/sitemap.xml" here once the site has
+# a production domain and the @astrojs/sitemap integration is configured
+# (it requires astro.config's `site` to be set to that real domain).

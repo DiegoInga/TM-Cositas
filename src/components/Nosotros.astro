@@ -1,0 +1,30 @@
+---
+import { Image } from "astro:assets";
+---
+
+<section id="nosotros" class="px-6 py-16 md:px-12 md:py-20">
+  <div
+    class="container mx-auto grid grid-cols-1 overflow-hidden rounded-3xl bg-blush md:grid-cols-2"
+    data-reveal
+  >
+    <div class="flex flex-col justify-center px-8 py-12 md:px-14 md:py-0">
+      <p class="text-xs font-semibold tracking-[0.2em] text-mauve-600 uppercase">Nosotros</p>
+      <h2 class="mt-3 font-display text-3xl font-medium leading-tight text-gray-900 sm:text-4xl">
+        Decoración hecha a mano, evento por evento.
+      </h2>
+      <p class="max-w-md mt-5 text-gray-700">
+        TM Cositas diseña y monta la decoración de cumpleaños temáticos, quinceañeros, bautizos,
+        baby showers y graduaciones en Lima Metropolitana. Cada montaje se piensa desde cero para
+        el homenajeado: sin kits genéricos, sin paquetes repetidos.
+      </p>
+    </div>
+
+    <Image
+      src="/image/pokemons.jpg"
+      alt="Decoración temática Pokémon realizada por TM Cositas"
+      width={640}
+      height={480}
+      class="h-64 w-full object-cover md:h-full"
+    />
+  </div>
+</section>

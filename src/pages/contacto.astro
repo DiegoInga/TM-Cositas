@@ -1,0 +1,127 @@
+---
+import Layout from "@layouts/Layout.astro";
+import { EVENT_CATEGORIES } from "@data/events";
+import { WHATSAPP_URL } from "@lib/constants";
+---
+
+<Layout
+  title="Contacto"
+  description="Cuéntanos la fecha, el tema y los detalles de tu evento. Te respondemos por WhatsApp con una propuesta a tu medida."
+>
+  <section class="px-6 py-20 bg-blush md:py-28 md:px-12">
+    <div class="container mx-auto">
+      <div class="max-w-xl mx-auto text-center" data-reveal>
+        <p class="text-xs font-semibold tracking-[0.2em] text-mauve-600 uppercase">Contacto</p>
+        <h1 class="mt-3 font-display text-3xl font-medium text-gray-900 sm:text-4xl">
+          Cuéntanos tu fecha y tu tema.
+        </h1>
+        <p class="mt-4 text-gray-600">
+          Completa el formulario y te escribimos por WhatsApp con una propuesta a tu medida —
+          nada se envía a ningún lado más, solo te ayuda a ordenar la idea antes de escribirnos.
+        </p>
+      </div>
+
+      <form
+        id="contact-form"
+        class="max-w-xl p-8 mx-auto mt-12 bg-white shadow-sm rounded-3xl sm:p-10"
+        data-reveal
+        style="transition-delay:100ms"
+      >
+        <div class="space-y-5">
+          <div>
+            <label for="nombre" class="block mb-1.5 text-sm font-semibold text-gray-900">
+              Tu nombre
+            </label>
+            <input
+              type="text"
+              id="nombre"
+              name="nombre"
+              required
+              class="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-gray-900 outline-none transition-shadow focus:border-mauve-400 focus:ring-4 focus:ring-mauve-100"
+              placeholder="¿Cómo te llamas?"
+            />
+          </div>
+
+          <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
+            <div>
+              <label for="tipoEvento" class="block mb-1.5 text-sm font-semibold text-gray-900">
+                Tipo de evento
+              </label>
+              <select
+                id="tipoEvento"
+                name="tipoEvento"
+                required
+                class="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-gray-900 outline-none transition-shadow focus:border-mauve-400 focus:ring-4 focus:ring-mauve-100"
+              >
+                <option value="" disabled selected>Elige una opción</option>
+                {EVENT_CATEGORIES.map((category) => (
+                  <option value={category.label}>{category.label}</option>
+                ))}
+                <option value="Otro">Otro</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="fecha" class="block mb-1.5 text-sm font-semibold text-gray-900">
+                Fecha aproximada
+              </label>
+              <input
+                type="date"
+                id="fecha"
+                name="fecha"
+                class="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-gray-900 outline-none transition-shadow focus:border-mauve-400 focus:ring-4 focus:ring-mauve-100"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label for="mensaje" class="block mb-1.5 text-sm font-semibold text-gray-900">
+              Cuéntanos tu idea
+            </label>
+            <textarea
+              id="mensaje"
+              name="mensaje"
+              rows="4"
+              class="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-gray-900 outline-none transition-shadow focus:border-mauve-400 focus:ring-4 focus:ring-mauve-100"
+              placeholder="Colores, personajes, lugar, número de invitados..."
+            ></textarea>
+          </div>
+
+          <button
+            type="submit"
+            class="inline-flex w-full items-center justify-center gap-2 rounded-full bg-mauve-500 px-7 py-3.5 text-sm font-semibold uppercase tracking-[0.1em] text-white transition-all duration-300 hover:scale-[1.02] hover:bg-mauve-600"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-4 h-4">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M22 2 11 13" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M22 2 15 22l-4-9-9-4 20-7Z" />
+            </svg>
+            Enviar por WhatsApp
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <script is:inline define:vars={{ whatsappUrl: WHATSAPP_URL }}>
+    const form = document.getElementById("contact-form");
+
+    form?.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const data = new FormData(form);
+      const nombre = data.get("nombre");
+      const tipoEvento = data.get("tipoEvento");
+      const fecha = data.get("fecha");
+      const mensaje = data.get("mensaje");
+
+      const lines = [
+        "Hola, soy " + nombre + ".",
+        "Quiero cotizar: " + tipoEvento,
+        fecha ? "Fecha aproximada: " + fecha : null,
+        mensaje ? "Detalles: " + mensaje : null,
+      ].filter(Boolean);
+
+      const text = encodeURIComponent(lines.join("\n"));
+      window.open(whatsappUrl + "?text=" + text, "_blank", "noopener,noreferrer");
+    });
+  </script>
+</Layout>

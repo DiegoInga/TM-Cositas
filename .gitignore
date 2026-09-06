@@ -22,3 +22,18 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# impeccable design skill — keep config.json (hook settings) and surfaces/
+# (direction contracts), but not generated review screenshots/cache
+.impeccable/review/
+.impeccable/hook.cache.json
+
+# Playwright MCP tool output (transient QA screenshots/snapshots)
+.playwright-mcp/
+
+# Local AI coding-assistant skill/tool installs (per-machine, not site code —
+# reinstall anytime with `npx skills add` / `npx impeccable install`)
+.agent/
+.agents/
+.claude/
+.codex/

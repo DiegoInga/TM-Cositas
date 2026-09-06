@@ -1,0 +1,60 @@
+---
+import { Image } from "astro:assets";
+import { EVENT_CATEGORIES, EVENTS } from "@data/events";
+import Icon from "@components/Icon.astro";
+
+const cards = EVENT_CATEGORIES.map((category) => ({
+  ...category,
+  cover: EVENTS.find((event) => event.category === category.slug),
+}));
+---
+
+<section class="py-16 bg-white md:py-20">
+  <div class="container px-6 mx-auto md:px-12">
+    <div class="flex items-end justify-between">
+      <div>
+        <p class="text-xs font-semibold tracking-[0.2em] text-mauve-600 uppercase">Nuestro mundo</p>
+        <h2 class="mt-3 font-display text-3xl font-medium text-gray-900 sm:text-4xl">
+          Un estilo para cada celebración
+        </h2>
+      </div>
+      <a href="/deco" class="hidden shrink-0 rounded-full border border-gray-900 px-5 py-2 text-xs font-semibold uppercase tracking-[0.1em] text-gray-900 transition-colors hover:bg-gray-900 hover:text-white sm:inline-block">
+        Ver todas
+      </a>
+    </div>
+
+    <div class="grid grid-cols-2 gap-4 mt-10 sm:grid-cols-3 lg:grid-cols-5">
+      {cards.map(({ slug, label, startingPrice, cover }, i) => (
+        <a
+          href={`/deco#${slug}`}
+          class="group block"
+          data-reveal
+          style={`transition-delay:${i * 60}ms`}
+        >
+          <div class="relative overflow-hidden rounded-2xl bg-blush aspect-[4/5]">
+            {cover && (
+              <Image
+                src={cover.src}
+                alt=""
+                width={360}
+                height={450}
+                class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+            )}
+            <span class="absolute bottom-3 right-3 flex h-9 w-9 items-center justify-center rounded-full bg-white text-gray-900 shadow-sm transition-transform group-hover:scale-110">
+              <Icon name="arrow-right" class="w-4 h-4" />
+            </span>
+          </div>
+          <p class="mt-3 text-sm font-semibold text-gray-900">{label}</p>
+          <p class="text-xs text-gray-500">
+            {startingPrice ? `Desde S/ ${startingPrice}` : "Cotiza por WhatsApp"}
+          </p>
+        </a>
+      ))}
+    </div>
+
+    <a href="/deco" class="inline-flex items-center mt-8 text-sm font-semibold text-gray-900 border-b border-gray-900 pb-0.5 sm:hidden">
+      Ver todas las decoraciones →
+    </a>
+  </div>
+</section>

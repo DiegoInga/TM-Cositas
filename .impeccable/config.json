@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "broken-image",
+        "value": "*",
+        "files": [
+          "src/components/Lightbox.astro"
+        ],
+        "createdAt": "2026-09-06T21:34:07.767Z",
+        "reason": "Lightbox <img> is a JS-populated template with no static src by design — always hidden until a click sets a real src/alt right before display, never rendered broken."
+      }
+    ]
+  }
+}

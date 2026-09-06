@@ -1,0 +1,41 @@
+---
+import Layout from "@layouts/Layout.astro";
+import { WHATSAPP_URL } from "@lib/constants";
+---
+
+<Layout title="Página no encontrada" description="Esta página no existe, pero seguimos aquí para ayudarte a planear tu evento.">
+  <section class="flex min-h-[70vh] flex-col items-center justify-center px-6 py-20 text-center bg-blush md:px-12">
+    <p class="text-xs font-semibold tracking-[0.2em] text-mauve-600 uppercase">Error 404</p>
+    <h1 class="mt-3 font-display text-3xl font-medium text-gray-900 sm:text-4xl">
+      Esta página no existe.
+    </h1>
+    <p class="max-w-md mt-4 text-gray-600">
+      Puede que el enlace esté roto o la página se haya movido. Mientras tanto, mira nuestras
+      decoraciones o cuéntanos tu idea.
+    </p>
+
+    <div class="flex flex-col gap-3 mt-8 sm:flex-row">
+      <a
+        href="/deco"
+        class="inline-flex items-center justify-center rounded-full bg-mauve-500 px-7 py-3 text-sm font-semibold uppercase tracking-[0.1em] text-white transition-colors hover:bg-mauve-600"
+      >
+        Ver decoraciones
+      </a>
+      <a
+        href="/"
+        class="inline-flex items-center justify-center rounded-full border border-gray-900 px-7 py-3 text-sm font-semibold uppercase tracking-[0.1em] text-gray-900 transition-colors hover:bg-gray-900 hover:text-white"
+      >
+        Ir al inicio
+      </a>
+    </div>
+
+    <a
+      href={WHATSAPP_URL}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="inline-flex items-center mt-8 text-sm font-semibold text-gray-900 border-b border-gray-900 pb-0.5 hover:text-mauve-600 hover:border-mauve-600"
+    >
+      O escríbenos directo por WhatsApp →
+    </a>
+  </section>
+</Layout>

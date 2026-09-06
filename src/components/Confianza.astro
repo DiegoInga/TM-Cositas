@@ -1,0 +1,20 @@
+---
+import { TRUST_BADGES } from "@data/features";
+import Icon from "@components/Icon.astro";
+
+const icons = ["sparkles", "wand", "message-circle", "users"] as const;
+---
+
+<section class="px-6 py-10 bg-white md:px-12 md:py-14">
+  <div class="container grid grid-cols-2 gap-3 mx-auto md:grid-cols-4 md:gap-4" data-reveal>
+    {TRUST_BADGES.map((badge, i) => (
+      <div class="flex items-center gap-3 rounded-2xl border border-mauve-100 bg-white px-4 py-4 shadow-sm">
+        <Icon name={icons[i]} class="w-5 h-5 flex-shrink-0 text-mauve-500" />
+        <div>
+          <p class="text-sm font-semibold text-gray-900">{badge.title}</p>
+          <p class="text-xs text-gray-500">{badge.description}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>

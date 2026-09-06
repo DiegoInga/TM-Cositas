@@ -1,0 +1,103 @@
+---
+---
+
+<!--
+  Global lightbox: any <img> or wrapper marked data-lightbox opens here on click.
+  Set data-lightbox-caption for the text shown under the enlarged photo.
+-->
+<div
+  id="lightbox"
+  class="fixed inset-0 z-[1100] hidden items-center justify-center bg-black/90 p-4"
+  role="dialog"
+  aria-modal="true"
+  aria-hidden="true"
+>
+  <button
+    id="lightbox-close"
+    class="absolute flex items-center justify-center w-10 h-10 text-white rounded-full top-4 right-4 hover:bg-white/10"
+    aria-label="Cerrar"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-6 h-6">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+    </svg>
+  </button>
+
+  <button
+    id="lightbox-prev"
+    class="absolute flex items-center justify-center w-10 h-10 text-white -translate-y-1/2 rounded-full left-2 top-1/2 hover:bg-white/10 sm:left-4"
+    aria-label="Foto anterior"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-7 h-7">
+      <path stroke-linecap="round" stroke-linejoin="round" d="m15 18-6-6 6-6" />
+    </svg>
+  </button>
+
+  <button
+    id="lightbox-next"
+    class="absolute flex items-center justify-center w-10 h-10 text-white -translate-y-1/2 rounded-full right-2 top-1/2 hover:bg-white/10 sm:right-4"
+    aria-label="Siguiente foto"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-7 h-7">
+      <path stroke-linecap="round" stroke-linejoin="round" d="m9 18 6-6-6-6" />
+    </svg>
+  </button>
+
+  <figure class="max-h-[85vh] max-w-[90vw]">
+    <img id="lightbox-img" alt="" class="max-h-[80vh] max-w-[90vw] rounded-lg object-contain" />
+    <figcaption id="lightbox-caption" class="mt-3 text-sm text-center text-white/80"></figcaption>
+  </figure>
+</div>
+
+<script>
+  const overlay = document.getElementById("lightbox");
+  const imgEl = document.getElementById("lightbox-img") as HTMLImageElement | null;
+  const captionEl = document.getElementById("lightbox-caption");
+  const closeBtn = document.getElementById("lightbox-close");
+  const prevBtn = document.getElementById("lightbox-prev");
+  const nextBtn = document.getElementById("lightbox-next");
+
+  const triggers = Array.from(document.querySelectorAll<HTMLElement>("[data-lightbox]"));
+  let activeIndex = 0;
+
+  function open(index: number) {
+    if (!overlay || !imgEl || triggers.length === 0) return;
+    activeIndex = (index + triggers.length) % triggers.length;
+    const trigger = triggers[activeIndex];
+    const src = trigger.getAttribute("data-lightbox") || "";
+    imgEl.src = src;
+    imgEl.alt = trigger.getAttribute("data-lightbox-alt") || "";
+    if (captionEl) captionEl.textContent = trigger.getAttribute("data-lightbox-caption") || "";
+    overlay.classList.remove("hidden");
+    overlay.classList.add("flex");
+    overlay.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+  }
+
+  function close() {
+    if (!overlay) return;
+    overlay.classList.add("hidden");
+    overlay.classList.remove("flex");
+    overlay.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+  }
+
+  triggers.forEach((trigger, i) => {
+    trigger.style.cursor = "zoom-in";
+    trigger.addEventListener("click", () => open(i));
+  });
+
+  closeBtn?.addEventListener("click", close);
+  prevBtn?.addEventListener("click", () => open(activeIndex - 1));
+  nextBtn?.addEventListener("click", () => open(activeIndex + 1));
+
+  overlay?.addEventListener("click", (e) => {
+    if (e.target === overlay) close();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (overlay?.getAttribute("aria-hidden") === "true") return;
+    if (e.key === "Escape") close();
+    if (e.key === "ArrowLeft") open(activeIndex - 1);
+    if (e.key === "ArrowRight") open(activeIndex + 1);
+  });
+</script>
